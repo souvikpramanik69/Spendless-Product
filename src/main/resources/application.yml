@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: Product
+  datasource:
+    url: jdbc:postgresql://localhost:5432/spendless-product
+    username: postgres
+    password: Souvikp683@
+    driver-class-name: org.postgresql.Driver
+server:
+  port: 8009
