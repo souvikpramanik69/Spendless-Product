@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 public interface UserService {
 
-    public ApiResponse<String, UserDto> createUserService( UserPayload payload);
+    public UserDto signupService( UserPayload payload);
+    public UserDto singinService( UserPayload payload);
 
 }

@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class UserToUserDtoMapper extends   Users {
+public class UserToUserDtoMapper extends  UserDto{
     public static UserDto mapToDto(Users user){
 
         UserDto dto = new UserDto();

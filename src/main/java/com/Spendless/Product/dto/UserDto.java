@@ -1,6 +1,17 @@
 package com.Spendless.Product.dto;
 
-import com.Spendless.Product.model.Users;
+import lombok.Getter;
+import lombok.Setter;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
-public class UserDto extends Users {
+@Getter
+@Setter
+public class UserDto  {
+
+    private UUID id;
+    private String email;
+    private String password;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

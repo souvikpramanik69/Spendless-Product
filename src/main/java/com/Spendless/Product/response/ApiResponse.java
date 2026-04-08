@@ -10,37 +10,31 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @NoArgsConstructor
-public class ApiResponse<T,Object> {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ApiResponse<T> {
 
     private int code;
-    private T message;
-    private java.lang.Object data;
+    private String message;
+    private T data;
     private Status status;
-    public enum Status{
+
+    public enum Status {
         ERROR,
         SUCCESS,
         PENDING
     }
 
-    public ApiResponse(int code, T message, Status status,java.lang.Object data){
-        this.code=code;
-        this.message=message;
-        this.status=status;
-        this.data=data;
+    public ApiResponse(int code, String message, Status status, T data) {
+        this.code = code;
+        this.message = message;
+        this.status = status;
+        this.data = data;
     }
 
-    public ApiResponse(int code, T message,Status status){
-        this.code=code;
-        this.message=message;
-        this.status=status;
+    public ApiResponse(int code, String message, Status status) {
+        this.code = code;
+        this.message = message;
+        this.status = status;
     }
-
-
-
-
-
-
-
 }

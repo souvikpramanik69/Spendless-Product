@@ -3,11 +3,31 @@ spring:
     name: Product
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
   datasource:
     url: jdbc:postgresql://localhost:5432/spendless-product
     username: postgres
-    password: vyrazu
+    password: Souvikp683@
     driver-class-name: org.postgresql.Driver
+  output:
+    ansi:
+      enabled: ALWAYS
+  devtools:
+    restart:
+      enabled: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+
 server:
   port: 8009
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    path: /docs
+    enabled: true
+  override-with-generic-response: false
