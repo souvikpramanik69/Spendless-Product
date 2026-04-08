@@ -1,4 +1,6 @@
 package com.Spendless.Product.dto;
 
-public class UserDto {
+import com.Spendless.Product.model.Users;
+
+public class UserDto extends Users {
 }
