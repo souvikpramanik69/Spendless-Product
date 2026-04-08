@@ -1,6 +1,6 @@
-package com.Spendless.Product.Controller;
+package com.Spendless.Product.controller;
 
-import com.Spendless.Product.Response.ApiResponse;
+import com.Spendless.Product.response.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

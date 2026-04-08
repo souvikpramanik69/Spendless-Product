@@ -1,4 +1,4 @@
-package com.Spendless.Product.Dto;
+package com.Spendless.Product.dto;
 
 import lombok.*;
 
@@ -6,7 +6,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductDto {
+public class ExpenseDto {
 
 
     String id;
