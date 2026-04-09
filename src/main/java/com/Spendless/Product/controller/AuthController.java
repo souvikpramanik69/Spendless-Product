@@ -6,6 +6,7 @@ import com.Spendless.Product.response.ApiResponse;
 import com.Spendless.Product.service.userService.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +26,7 @@ public class AuthController {
 
     @PostMapping("/auth/signup")
     @Operation(summary = "Register new user", description = "Creates a new user account")
-    public ResponseEntity<ApiResponse<UserDto>> signupController( @RequestBody UserPayload payload){
+    public ResponseEntity<ApiResponse<UserDto>> signupController(@Valid @RequestBody UserPayload payload){
 
                ApiResponse<UserDto> response = new ApiResponse<UserDto>();
                UserDto data = userService.signupService(payload);
@@ -36,7 +37,7 @@ public class AuthController {
     }
 
     @PostMapping("/auth/signin")
-    public ResponseEntity<ApiResponse<UserDto>> signinController( @RequestBody UserPayload payload){
+    public ResponseEntity<ApiResponse<UserDto>> signinController(@Valid @RequestBody UserPayload payload){
            ApiResponse<UserDto> response = new ApiResponse<>();
             UserDto user = userService.singinService(payload);
             response.setStatus(ApiResponse.Status.SUCCESS);

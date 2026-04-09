@@ -31,7 +31,6 @@ public class UserServiceImpl implements UserService{
         }
 
     Users newUser = new Users();
-    newUser.setId(UUID.randomUUID());
     newUser.setEmail(payload.getEmail());
     newUser.setPassword(payload.getPassword());
     UserDto dto = UserToUserDtoMapper.mapToDto(userRepository.save(newUser));

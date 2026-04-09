@@ -7,7 +7,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/spendless-product
     username: postgres
-    password: Souvikp683@
+    password: vyrazu
     driver-class-name: org.postgresql.Driver
   output:
     ansi:
@@ -15,14 +15,11 @@ spring:
   devtools:
     restart:
       enabled: true
-  mvc:
-    throw-exception-if-no-handler-found: true
-  web:
-    resources:
-      add-mappings: false
 
 server:
   port: 8009
+  error:
+    include-binding-errors: always
 
 springdoc:
   api-docs:
@@ -31,3 +28,4 @@ springdoc:
     path: /docs
     enabled: true
   override-with-generic-response: false
+
