@@ -2,6 +2,7 @@ package com.Spendless.Product.dto;
 
 import com.Spendless.Product.model.Expenses;
 import com.Spendless.Product.model.Section;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDto  {
 
     private UUID id;

@@ -2,6 +2,7 @@ package com.Spendless.Product.model;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.cglib.core.Local;
 
@@ -13,7 +14,6 @@ import java.util.UUID;
 public class Expenses {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String name;
     private Double amount;

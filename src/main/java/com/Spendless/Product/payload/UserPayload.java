@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 public class UserPayload {
@@ -20,5 +22,7 @@ public class UserPayload {
     @Schema(description = "User email", example = "test@123")
     @NotBlank(message = "Password is required")
     private String password;
+
+    private UUID id;
 
 }

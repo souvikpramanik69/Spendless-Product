@@ -3,7 +3,7 @@ package com.Spendless.Product.controller;
 import com.Spendless.Product.dto.UserDto;
 import com.Spendless.Product.payload.UserPayload;
 import com.Spendless.Product.response.ApiResponse;
-import com.Spendless.Product.service.userService.UserService;
+import com.Spendless.Product.service.authService.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Auth Api's",description = "Signup and Signin APIs")
 public class AuthController {
 
-    private final UserService userService;
+    private final AuthService userService;
 
-    public AuthController(UserService userService){
+    public AuthController(AuthService userService){
         this.userService = userService;
     }
 

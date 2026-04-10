@@ -1,6 +1,7 @@
 package com.Spendless.Product.handler;
 
 import com.Spendless.Product.exception.SectionAlreadyExistException;
+import com.Spendless.Product.exception.SectionNotFoundException;
 import com.Spendless.Product.exception.UserAlreadyExistException;
 import com.Spendless.Product.exception.UserNotFoundException;
 import com.Spendless.Product.response.ApiResponse;
@@ -32,6 +33,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponse<String>> handleSectionAlreadyExist(SectionAlreadyExistException ex) {
         return ResponseEntity.status(409)
                 .body(new ApiResponse<>(409, ex.getMessage(), ApiResponse.Status.ERROR));
+    }
+
+    @ExceptionHandler(SectionNotFoundException.class)
+    public ResponseEntity<ApiResponse<String>> handleSectionNotFound(SectionNotFoundException ex) {
+        return ResponseEntity.status(404)
+                .body(new ApiResponse<>(404, ex.getMessage(), ApiResponse.Status.ERROR));
     }
 
     @ExceptionHandler(Exception.class)
