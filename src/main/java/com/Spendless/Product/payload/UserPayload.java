@@ -22,6 +22,9 @@ public class UserPayload {
     @Schema(description = "User email", example = "test@123")
     @NotBlank(message = "Password is required")
     private String password;
+    private String provider_id;
+    @NotBlank(message = "Provider name is required")
+    private String provider_name;
 
     private UUID id;
 

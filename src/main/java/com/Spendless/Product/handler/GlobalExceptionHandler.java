@@ -1,9 +1,6 @@
 package com.Spendless.Product.handler;
 
-import com.Spendless.Product.exception.SectionAlreadyExistException;
-import com.Spendless.Product.exception.SectionNotFoundException;
-import com.Spendless.Product.exception.UserAlreadyExistException;
-import com.Spendless.Product.exception.UserNotFoundException;
+import com.Spendless.Product.exception.*;
 import com.Spendless.Product.response.ApiResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -27,6 +24,23 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponse<String>> handleUserAlreadyExist(UserAlreadyExistException ex) {
         return ResponseEntity.status(409)
                 .body(new ApiResponse<>(409, ex.getMessage(), ApiResponse.Status.ERROR));
+    }
+
+    @ExceptionHandler(ExpenseNotFoundException.class)
+    public ResponseEntity<ApiResponse<String>> handleExpenseNotFound(ExpenseNotFoundException ex) {
+        return ResponseEntity.status(404)
+                .body(new ApiResponse<>(404, ex.getMessage(), ApiResponse.Status.ERROR));
+    }
+
+    @ExceptionHandler(BudgetExceedException.class)
+    public ResponseEntity<ApiResponse<String>> handleBudgetExceed(BudgetExceedException ex) {
+        return ResponseEntity.status(422)
+                .body(new ApiResponse<>(422, ex.getMessage(), ApiResponse.Status.ERROR));
+    }
+    @ExceptionHandler(SectionOwnerNotFoundException.class)
+    public ResponseEntity<ApiResponse<String>> handleSectionOwnerNotFound(SectionOwnerNotFoundException ex) {
+        return ResponseEntity.status(401)
+                .body(new ApiResponse<>(401, ex.getMessage(), ApiResponse.Status.ERROR));
     }
 
     @ExceptionHandler(SectionAlreadyExistException.class)

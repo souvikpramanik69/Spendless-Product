@@ -1,7 +1,5 @@
 package com.Spendless.Product.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,47 +8,27 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
-
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Expenses {
+public class Bill {
 
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(updatable = false, nullable = false)
     private UUID id;
-    private String name;
-    private Double amount;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "section_id")
+    private Section section;
     @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
-
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonBackReference
-    private Users users;
-
-
-    @ManyToOne
-    @JoinColumn(name = "section_id")
-    @JsonBackReference
-    private Section section;
-
-
-
-
-
 
 }

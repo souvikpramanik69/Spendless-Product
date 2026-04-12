@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -17,9 +18,13 @@ public class SectionDto {
     private UUID id;
     private String name;
     private double budget;
+    private double totalCost;
     private Set<UserDto> users;
+    public List<ExpenseDto> expenses;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private String created_user_name;
+    private UUID created_user_id;
 
 
 

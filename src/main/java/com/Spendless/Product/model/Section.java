@@ -1,6 +1,7 @@
 package com.Spendless.Product.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,9 +29,21 @@ public class Section {
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+    private double totalCost;
+    private String created_user_name;
+    private UUID created_user_id;
+    @OneToOne(mappedBy = "section",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Bill bill;
 
 
-    @ManyToMany(mappedBy = "sections")
+    @OneToMany( mappedBy = "section", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Expenses> expenses = new ArrayList<>();
+
+
+
+
+    @ManyToMany(mappedBy = "sections",cascade = CascadeType.ALL)
     @JsonBackReference
     private Set<Users> users = new HashSet<>();
 

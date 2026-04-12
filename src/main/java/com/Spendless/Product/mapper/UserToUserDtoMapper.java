@@ -24,6 +24,8 @@ public class UserToUserDtoMapper extends  UserDto{
          dto.setPassword(user.getPassword());
          dto.setUpdatedAt(user.getUpdatedAt());
          dto.setCreatedAt(user.getUpdatedAt());
+         dto.setProvider_id(user.getProvider_id());
+         dto.setProvider_name(user.getProvider_name());
          return dto;
 
     }

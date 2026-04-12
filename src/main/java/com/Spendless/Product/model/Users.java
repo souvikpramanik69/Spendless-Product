@@ -23,6 +23,10 @@ public class Users {
     private UUID id;
     private String email;
     private String password;
+
+    private String provider_id;
+    private String provider_name;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp
@@ -37,7 +41,11 @@ public class Users {
     private Set<Section> sections = new HashSet<>();
 
     @OneToMany( mappedBy = "users", cascade = CascadeType.ALL)
-    private List<Expenses> expenses;
+    @JsonManagedReference
+    private List<Expenses> expenses = new ArrayList<>();
+    @OneToMany(mappedBy = "users",cascade = CascadeType.ALL)
+    private List<Role> roles = new ArrayList<>();
+
 
     public void addSection(Section section){
         this.getSections().add(section);

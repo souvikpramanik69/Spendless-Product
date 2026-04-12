@@ -1,5 +1,6 @@
 package com.Spendless.Product.service.sectionService;
 
+import com.Spendless.Product.dto.ExpenseDto;
 import com.Spendless.Product.dto.SectionDto;
 import com.Spendless.Product.dto.UserDto;
 import com.Spendless.Product.exception.SectionAlreadyExistException;
@@ -9,6 +10,7 @@ import com.Spendless.Product.mapper.SectionToSectionDto;
 import com.Spendless.Product.model.Section;
 import com.Spendless.Product.model.Users;
 import com.Spendless.Product.payload.SectionPayload;
+import com.Spendless.Product.repository.ExpenseRepository;
 import com.Spendless.Product.repository.SectionRepository;
 import com.Spendless.Product.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -22,15 +24,17 @@ public class SectionServiceImpl implements SectionService{
 
     private final SectionRepository sectionRepository;
     private final UserRepository userRepository;
+    private final ExpenseRepository expenseRepository;
 
-    public SectionServiceImpl(SectionRepository sectionRepository,UserRepository userRepository){
+    public SectionServiceImpl(SectionRepository sectionRepository,UserRepository userRepository,ExpenseRepository expenseRepository){
         this.sectionRepository = sectionRepository;
         this.userRepository = userRepository;
+        this.expenseRepository = expenseRepository;
+
     }
 
     @Transactional
     public SectionDto createSection(SectionPayload payload) {
-
         Users user = userRepository.findById(payload.getUserId())
                 .orElseThrow(() -> new UserNotFoundException("User doesn't exist"));
         sectionRepository.findByName(payload.getName())
@@ -41,6 +45,8 @@ public class SectionServiceImpl implements SectionService{
         section.setName(payload.getName());
         section.setBudget(payload.getBudget());
         section.addUsers(user);
+        section.setCreated_user_id(payload.getUserId());
+        section.setCreated_user_name(user.getEmail());
         Section savedSection = sectionRepository.save(section);
 
         return SectionToSectionDto.mapToDto(savedSection);
@@ -49,21 +55,39 @@ public class SectionServiceImpl implements SectionService{
     public List<SectionDto> getAllSections(){
      return sectionRepository.findAll().stream().map(item->{
          SectionDto dto = new SectionDto();
+//         Double total_cost = expenseRepository.getTotalAmountBySectionId(item.getId());
+//
+//         System.out.println("Total cost "+ total_cost);
+
          dto.setId(item.getId());
         Set<UserDto> userDtoData =  item.getUsers().stream().map((value)->{
              UserDto userDto = new UserDto();
              userDto.setId(value.getId());
              userDto.setEmail(value.getEmail());
-             userDto.setExpenses(value.getExpenses());
              userDto.setCreatedAt(value.getCreatedAt());
              userDto.setUpdatedAt(value.getUpdatedAt());
              return userDto;
          }).collect(Collectors.toSet());
+
+        List<ExpenseDto> expenseDtos = item.getExpenses().stream().map((data)->{
+            ExpenseDto expenseDto = new ExpenseDto();
+            expenseDto.setId(data.getId());
+            expenseDto.setAmount(data.getAmount());
+            expenseDto.setPaid_by(data.getUsers().getEmail());
+            expenseDto.setName(data.getName());
+            expenseDto.setCreatedAt(data.getCreatedAt());
+            expenseDto.setUpdatedAt(data.getUpdatedAt());
+            return expenseDto;
+        }).toList();
         dto.setUsers(userDtoData);
         dto.setName(item.getName());
         dto.setUpdatedAt(item.getUpdatedAt());
         dto.setBudget(item.getBudget());
         dto.setCreatedAt(item.getCreatedAt());
+        dto.setCreated_user_name(item.getCreated_user_name());
+        dto.setCreated_user_id(item.getCreated_user_id());
+        dto.setExpenses(expenseDtos);
+        dto.setTotalCost(item.getTotalCost());
         return dto;
      }).toList();
 

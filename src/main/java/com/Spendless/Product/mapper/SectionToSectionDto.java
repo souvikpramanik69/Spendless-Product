@@ -23,21 +23,23 @@ public class SectionToSectionDto {
         dto.setBudget(section.getBudget());
         dto.setUpdatedAt(section.getUpdatedAt());
         dto.setCreatedAt(section.getUpdatedAt());
+        dto.setCreated_user_id(section.getCreated_user_id());
+        dto.setCreated_user_name(section.getCreated_user_name());
 
         Set<UserDto> users = section.getUsers().stream().map((item)->{
             UserDto dtoData = new UserDto();
             dtoData.setId(item.getId());
             dtoData.setEmail(item.getEmail());
-            dtoData.setExpenses(item.getExpenses());
             dtoData.setUpdatedAt(item.getUpdatedAt());
             dtoData.setCreatedAt(item.getCreatedAt());
             dtoData.setPassword(item.getPassword());
             return dtoData;
         }).collect(Collectors.toSet());
-
         dto.setUsers(users);
-
         return dto;
 
     }
+
+
+
 }

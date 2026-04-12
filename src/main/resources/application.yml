@@ -7,7 +7,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/spendless-product
     username: postgres
-    password: vyrazu
+    password: Souvikp683@
     driver-class-name: org.postgresql.Driver
   output:
     ansi:

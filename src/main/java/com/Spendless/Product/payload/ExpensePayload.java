@@ -1,11 +1,12 @@
-package com.Spendless.Product.dto;
+package com.Spendless.Product.payload;
 
 import com.Spendless.Product.model.Section;
 import com.Spendless.Product.model.Users;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -14,18 +15,12 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class ExpenseDto {
-
-
+public class ExpensePayload {
     private UUID id;
     private String name;
     private Double amount;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private String paid_by;
-
-
-
+    private UUID user_id;
+    private UUID section_id;
 }
