@@ -18,6 +18,7 @@ public class UserDto  {
 
     private UUID id;
     private String email;
+    private String name;
     private String password;
     private String provider_id;
     private String provider_name;

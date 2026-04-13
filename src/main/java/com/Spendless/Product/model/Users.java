@@ -23,7 +23,7 @@ public class Users {
     private UUID id;
     private String email;
     private String password;
-
+    private String name;
     private String provider_id;
     private String provider_name;
 

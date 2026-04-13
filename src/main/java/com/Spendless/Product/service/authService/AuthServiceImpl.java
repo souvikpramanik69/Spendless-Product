@@ -27,6 +27,7 @@ public class AuthServiceImpl implements AuthService {
 
     Users newUser = new Users();
     newUser.setEmail(payload.getEmail());
+    newUser.setName(payload.getName());
     newUser.setPassword(payload.getPassword());
     newUser.setProvider_id(Boolean.parseBoolean(payload.getProvider_id()) ? payload.getProvider_id() : "");
     newUser.setProvider_name(payload.getProvider_name());

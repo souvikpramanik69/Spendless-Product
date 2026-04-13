@@ -30,6 +30,7 @@ public class UserController {
     }
 
     @DeleteMapping("/user/{id}")
+    @Operation(summary = "Delete user by uuid", description = "Here you can delete user by uuid")
     public ResponseEntity<ApiResponse<String>> deleteUserById(@PathVariable UUID id){
         return ResponseEntity.status(200).body(new ApiResponse<>(200, userService.deleteUserById(id), ApiResponse.Status.SUCCESS));
     }

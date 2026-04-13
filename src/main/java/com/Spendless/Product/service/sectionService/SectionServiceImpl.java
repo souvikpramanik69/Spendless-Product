@@ -3,6 +3,7 @@ package com.Spendless.Product.service.sectionService;
 import com.Spendless.Product.dto.ExpenseDto;
 import com.Spendless.Product.dto.SectionDto;
 import com.Spendless.Product.dto.UserDto;
+import com.Spendless.Product.exception.BudgetNotAcceptException;
 import com.Spendless.Product.exception.SectionAlreadyExistException;
 import com.Spendless.Product.exception.SectionNotFoundException;
 import com.Spendless.Product.exception.UserNotFoundException;
@@ -41,12 +42,15 @@ public class SectionServiceImpl implements SectionService{
                 .ifPresent(s -> {
                     throw new SectionAlreadyExistException("Section already exists");
                 });
+        if(payload.getBudget() < 0){
+            throw new BudgetNotAcceptException("Budget can't be less then 0");
+        }
         Section section = new Section();
         section.setName(payload.getName());
         section.setBudget(payload.getBudget());
         section.addUsers(user);
         section.setCreated_user_id(payload.getUserId());
-        section.setCreated_user_name(user.getEmail());
+        section.setCreated_user_name(user.getName());
         Section savedSection = sectionRepository.save(section);
 
         return SectionToSectionDto.mapToDto(savedSection);
@@ -108,6 +112,8 @@ public class SectionServiceImpl implements SectionService{
         if(users.isEmpty()){
             throw new UserNotFoundException("No Users Found");
         }
+        section.setName(Boolean.parseBoolean(payload.getName())? payload.getName() : section.getName());
+        section.setBudget(payload.getBudget() != 0  ? payload.getBudget() : section.getBudget());
         users.forEach(section::addUsers);
         return SectionToSectionDto.mapToDto(sectionRepository.save(section));
     }
@@ -124,6 +130,8 @@ public class SectionServiceImpl implements SectionService{
         }).toList();
 
     }
+
+
 
 
 

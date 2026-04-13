@@ -27,8 +27,8 @@ public class UserServiceImpl implements  UserService{
            dto.setId(item.getId());
            dto.setPassword(item.getPassword());
            dto.setEmail(item.getEmail());
-           dto.setExpenses(item.getExpenses());
-           dto.setSections(item.getSections());
+//           dto.setExpenses(item.getExpenses());
+//           dto.setSections(item.getSections());
            dto.setCreatedAt(item.getCreatedAt());
            dto.setUpdatedAt(item.getUpdatedAt());
            return dto;

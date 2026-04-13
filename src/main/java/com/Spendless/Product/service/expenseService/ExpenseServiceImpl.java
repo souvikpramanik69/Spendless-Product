@@ -13,6 +13,7 @@ import com.Spendless.Product.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -69,6 +70,22 @@ public class ExpenseServiceImpl implements  ExpenseService{
       expenseRepository.deleteById(expenseId);
       return "Expense has been deleted successfully by "+user.getEmail()+" (Owner)";
     }
+
+
+    public List<ExpenseDto> getAllExpensesBySectionId(UUID sectionId){
+        return  expenseRepository.getAllSectionsBySectionId(sectionId).stream().map(item->{
+            ExpenseDto dto = new ExpenseDto();
+            dto.setAmount(item.getAmount());
+            dto.setName(item.getName());
+            dto.setId(item.getId());
+            dto.setPaid_by(item.getUsers().getEmail());
+            dto.setUpdatedAt(item.getUpdatedAt());
+            dto.setCreatedAt(item.getCreatedAt());
+            return dto;
+
+        }).toList();
+    }
+
 
 
 }

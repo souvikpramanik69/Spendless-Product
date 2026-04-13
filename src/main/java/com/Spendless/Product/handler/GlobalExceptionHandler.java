@@ -26,6 +26,12 @@ public class GlobalExceptionHandler {
                 .body(new ApiResponse<>(409, ex.getMessage(), ApiResponse.Status.ERROR));
     }
 
+    @ExceptionHandler(BudgetNotAcceptException.class)
+    public ResponseEntity<ApiResponse<String>> handleBudgetNotAccept(BudgetNotAcceptException ex) {
+        return ResponseEntity.status(400)
+                .body(new ApiResponse<>(400, ex.getMessage(), ApiResponse.Status.ERROR));
+    }
+
     @ExceptionHandler(ExpenseNotFoundException.class)
     public ResponseEntity<ApiResponse<String>> handleExpenseNotFound(ExpenseNotFoundException ex) {
         return ResponseEntity.status(404)

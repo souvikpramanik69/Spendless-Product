@@ -18,6 +18,8 @@ public class UserPayload {
             regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
             message = "Invalid email format"
     )
+    @NotBlank(message = "Name is required")
+    private String name;
     private String email;
     @Schema(description = "User email", example = "test@123")
     @NotBlank(message = "Password is required")

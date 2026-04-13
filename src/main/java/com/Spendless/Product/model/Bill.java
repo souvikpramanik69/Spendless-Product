@@ -1,5 +1,6 @@
 package com.Spendless.Product.model;
 
+import com.Spendless.Product.utils.JsonConverter;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.UUID;
 @Entity
 @Getter
@@ -30,5 +32,9 @@ public class Bill {
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    @Column(columnDefinition = "jsonb",name = "consumers")
+    @Convert(converter = JsonConverter.class)
+    private Map<String, Object> data;
 
 }

@@ -29,9 +29,10 @@ public class Section {
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-    private double totalCost;
+    private double totalCost = 0.0;
     private String created_user_name;
     private UUID created_user_id;
+    private boolean isBillGenerated = false;
     @OneToOne(mappedBy = "section",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Bill bill;
 

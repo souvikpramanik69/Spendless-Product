@@ -25,7 +25,8 @@ public class SectionToSectionDto {
         dto.setCreatedAt(section.getUpdatedAt());
         dto.setCreated_user_id(section.getCreated_user_id());
         dto.setCreated_user_name(section.getCreated_user_name());
-
+        double remainingBudget = section.getBudget() - section.getTotalCost();
+        dto.setRemainingBudget(remainingBudget);
         Set<UserDto> users = section.getUsers().stream().map((item)->{
             UserDto dtoData = new UserDto();
             dtoData.setId(item.getId());

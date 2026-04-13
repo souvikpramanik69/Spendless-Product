@@ -20,6 +20,7 @@ public class SectionDto {
     private double budget;
     private double totalCost;
     private Set<UserDto> users;
+    private double remainingBudget;
     public List<ExpenseDto> expenses;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

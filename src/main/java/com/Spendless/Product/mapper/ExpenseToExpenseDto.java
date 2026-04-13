@@ -12,14 +12,13 @@ import lombok.Setter;
 public class ExpenseToExpenseDto {
 
     public static ExpenseDto mapToDto(Expenses expense){
-
         ExpenseDto dto = new ExpenseDto();
         dto.setId(expense.getId());
         dto.setName(expense.getName());
         dto.setAmount(expense.getAmount());
         dto.setCreatedAt(expense.getCreatedAt());
         dto.setUpdatedAt(expense.getUpdatedAt());
-        dto.setPaid_by(expense.getUsers().getEmail());
+        dto.setPaid_by(expense.getUsers().getName());
         return dto;
 
     }
