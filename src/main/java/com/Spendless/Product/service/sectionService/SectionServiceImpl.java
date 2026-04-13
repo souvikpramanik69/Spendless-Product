@@ -92,6 +92,8 @@ public class SectionServiceImpl implements SectionService{
         dto.setCreated_user_id(item.getCreated_user_id());
         dto.setExpenses(expenseDtos);
         dto.setTotalCost(item.getTotalCost());
+         double remainingBudget = item.getBudget() - item.getTotalCost();
+        dto.setRemainingBudget(remainingBudget);
         return dto;
      }).toList();
 
