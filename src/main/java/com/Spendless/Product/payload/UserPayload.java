@@ -21,6 +21,7 @@ public class UserPayload {
     @NotBlank(message = "Name is required")
     private String name;
     private String email;
+    private String role;
     @Schema(description = "User email", example = "test@123")
     @NotBlank(message = "Password is required")
     private String password;

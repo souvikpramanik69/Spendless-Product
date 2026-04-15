@@ -15,6 +15,8 @@ public class SectionPayload {
     @Schema(description = "User name", example = "Section 1")
     @NotBlank(message = "Name is required")
     private String name;
+
+
     
     private double budget;
 

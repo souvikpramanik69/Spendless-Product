@@ -7,6 +7,8 @@ import com.Spendless.Product.mapper.UserToUserDtoMapper;
 import com.Spendless.Product.model.Users;
 import com.Spendless.Product.payload.UserPayload;
 import com.Spendless.Product.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,6 +16,8 @@ public class AuthServiceImpl implements AuthService {
 
 
     private final UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     public AuthServiceImpl(UserRepository userRepository){
         this.userRepository = userRepository;
     }
@@ -28,7 +32,8 @@ public class AuthServiceImpl implements AuthService {
     Users newUser = new Users();
     newUser.setEmail(payload.getEmail());
     newUser.setName(payload.getName());
-    newUser.setPassword(payload.getPassword());
+    newUser.setRole("ROLE_"+payload.getRole().toUpperCase());
+    newUser.setPassword(passwordEncoder.encode(payload.getPassword()));
     newUser.setProvider_id(Boolean.parseBoolean(payload.getProvider_id()) ? payload.getProvider_id() : "");
     newUser.setProvider_name(payload.getProvider_name());
     UserDto dto = UserToUserDtoMapper.mapToDto(userRepository.save(newUser));

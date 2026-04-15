@@ -7,6 +7,9 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -14,7 +17,7 @@ import java.util.*;
 @Entity
 @Getter
 @Setter
-public class Users {
+public class Users implements UserDetails {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -43,8 +46,9 @@ public class Users {
     @OneToMany( mappedBy = "users", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Expenses> expenses = new ArrayList<>();
-    @OneToMany(mappedBy = "users",cascade = CascadeType.ALL)
-    private List<Role> roles = new ArrayList<>();
+
+
+    private String role;
 
 
     public void addSection(Section section){
@@ -53,4 +57,33 @@ public class Users {
     }
 
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role));
+    }
+
+    @Override
+    public String getUsername() {
+        return "";
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return UserDetails.super.isAccountNonExpired();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return UserDetails.super.isAccountNonLocked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return UserDetails.super.isCredentialsNonExpired();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return UserDetails.super.isEnabled();
+    }
 }

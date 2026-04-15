@@ -20,6 +20,7 @@ public class UserDto  {
     private String email;
     private String name;
     private String password;
+    private String role;
     private String provider_id;
     private String provider_name;
     private LocalDateTime createdAt;
