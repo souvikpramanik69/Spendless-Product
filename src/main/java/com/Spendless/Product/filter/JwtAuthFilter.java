@@ -33,7 +33,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String path = request.getServletPath();
-        if (path.startsWith("/api/v1/auth")) {
+        if (path.startsWith("/api/v1/auth") || path.startsWith("/docs") || path.startsWith("/swagger-ui/index.html")) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -51,7 +51,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                     return;
                 }
                 String token = authorization.substring(7);
-                System.out.println("Token in middleware " + token);
                 String email = jwtUtility.extractUsername(token);
 
                 if(email != null && SecurityContextHolder.getContext().getAuthentication() == null){

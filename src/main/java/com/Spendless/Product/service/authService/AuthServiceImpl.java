@@ -48,7 +48,12 @@ public class AuthServiceImpl implements AuthService {
 
 
     public Users singinService(UserPayload payload){
-     return userRepository.findByEmail(payload.getEmail()).orElseThrow(()-> new UserNotFoundException("User doesn't exist"));
+
+    Users user =   userRepository.findByEmail(payload.getEmail()).orElseThrow(()-> new UserNotFoundException("User doesn't exist"));
+    if(!passwordEncoder.matches(payload.getPassword(),user.getPassword())){
+      throw new UserNotFoundException("User doesn't exist");
+    }
+    return user;
     }
 
 
