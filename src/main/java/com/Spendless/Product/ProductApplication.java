@@ -1,6 +1,8 @@
 package com.Spendless.Product;
 
+import com.Spendless.Product.utils.JwtUtility;
 import lombok.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -15,6 +17,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class ProductApplication {
 
 	public static void main(String[] args) {
+
+		
 		ApplicationContext context = SpringApplication.run(ProductApplication.class, args);
 		Environment env = context.getEnvironment();
 		String port = env.getProperty("server.port");

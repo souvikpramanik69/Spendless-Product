@@ -1,5 +1,6 @@
 package com.Spendless.Product.mapper;
 
+import com.Spendless.Product.dto.AuthDto;
 import com.Spendless.Product.dto.UserDto;
 import com.Spendless.Product.model.Users;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +30,8 @@ public class UserToUserDtoMapper extends  UserDto{
          return dto;
 
     }
+
+
 
 
 }

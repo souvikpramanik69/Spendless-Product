@@ -1,5 +1,6 @@
 package com.Spendless.Product.service.authService;
 
+import com.Spendless.Product.dto.AuthDto;
 import com.Spendless.Product.dto.UserDto;
 import com.Spendless.Product.exception.UserAlreadyExistException;
 import com.Spendless.Product.exception.UserNotFoundException;
@@ -46,9 +47,8 @@ public class AuthServiceImpl implements AuthService {
     }
 
 
-    public UserDto singinService( UserPayload payload){
-       Users userData = userRepository.findByEmail(payload.getEmail()).orElseThrow(()-> new UserNotFoundException("User doesn't exist"));
-       return UserToUserDtoMapper.mapToDto(userData);
+    public Users singinService(UserPayload payload){
+     return userRepository.findByEmail(payload.getEmail()).orElseThrow(()-> new UserNotFoundException("User doesn't exist"));
     }
 
 

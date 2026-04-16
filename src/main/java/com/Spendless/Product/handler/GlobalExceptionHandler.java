@@ -3,6 +3,7 @@ package com.Spendless.Product.handler;
 import com.Spendless.Product.exception.*;
 import com.Spendless.Product.response.ApiResponse;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -24,6 +25,18 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponse<String>> handleUserAlreadyExist(UserAlreadyExistException ex) {
         return ResponseEntity.status(409)
                 .body(new ApiResponse<>(409, ex.getMessage(), ApiResponse.Status.ERROR));
+    }
+
+    @ExceptionHandler(TokenNotValidException.class)
+    public ResponseEntity<ApiResponse<String>> handleTokeNotValid(TokenNotValidException ex) {
+        return ResponseEntity.status(401)
+                .body(new ApiResponse<>(401, ex.getMessage(), ApiResponse.Status.ERROR));
+    }
+
+    @ExceptionHandler(UnAuthorizeException.class)
+    public ResponseEntity<ApiResponse<String>> handleUnauthorize(UnAuthorizeException ex) {
+        return ResponseEntity.status(401)
+                .body(new ApiResponse<>(401, ex.getMessage(), ApiResponse.Status.ERROR));
     }
 
     @ExceptionHandler(BudgetNotAcceptException.class)
