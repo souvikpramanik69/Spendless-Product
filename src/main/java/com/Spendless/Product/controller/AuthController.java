@@ -57,7 +57,7 @@ public class AuthController {
         dtoData.setName(user.getName());
         dtoData.setCreatedAt(user.getCreatedAt());
         dtoData.setUpdatedAt(user.getUpdatedAt());
-        dtoData.setRole(user.getRole());
+        dtoData.setRole(user.getRole().name());
         response.setStatus(ApiResponse.Status.SUCCESS);
         response.setCode(200);
         response.setData(dtoData);

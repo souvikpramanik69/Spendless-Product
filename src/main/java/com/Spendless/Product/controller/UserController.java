@@ -8,6 +8,7 @@ import com.Spendless.Product.service.userService.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class UserController {
     }
 
     @GetMapping("/users")
+    @PreAuthorize("hasAuthority('WRITE')")
     @Operation(summary = "Get all users", description = "Here you can get all users with all sections")
     public ResponseEntity<ApiResponse<List<UserDto>>> getAllUsers(){
      return  ResponseEntity.status(200).body(new ApiResponse<>(200,"All users has been retrieved", ApiResponse.Status.SUCCESS,userService.getAllUsers()));

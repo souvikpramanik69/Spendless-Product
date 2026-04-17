@@ -1,5 +1,6 @@
 package com.Spendless.Product.dto;
 
+import com.Spendless.Product.enums.Role;
 import com.Spendless.Product.model.Expenses;
 import com.Spendless.Product.model.Section;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -20,7 +21,7 @@ public class UserDto  {
     private String email;
     private String name;
     private String password;
-    private String role;
+    private Role role;
     private String provider_id;
     private String provider_name;
     private LocalDateTime createdAt;

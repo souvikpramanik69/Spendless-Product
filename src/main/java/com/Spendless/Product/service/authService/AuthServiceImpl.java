@@ -2,6 +2,7 @@ package com.Spendless.Product.service.authService;
 
 import com.Spendless.Product.dto.AuthDto;
 import com.Spendless.Product.dto.UserDto;
+import com.Spendless.Product.enums.Role;
 import com.Spendless.Product.exception.UserAlreadyExistException;
 import com.Spendless.Product.exception.UserNotFoundException;
 import com.Spendless.Product.mapper.UserToUserDtoMapper;
@@ -33,12 +34,11 @@ public class AuthServiceImpl implements AuthService {
     Users newUser = new Users();
     newUser.setEmail(payload.getEmail());
     newUser.setName(payload.getName());
-    newUser.setRole("ROLE_"+payload.getRole().toUpperCase());
+    newUser.setRole(payload.getRole());
     newUser.setPassword(passwordEncoder.encode(payload.getPassword()));
     newUser.setProvider_id(Boolean.parseBoolean(payload.getProvider_id()) ? payload.getProvider_id() : "");
     newUser.setProvider_name(payload.getProvider_name());
     UserDto dto = UserToUserDtoMapper.mapToDto(userRepository.save(newUser));
-
     return dto;
 
 

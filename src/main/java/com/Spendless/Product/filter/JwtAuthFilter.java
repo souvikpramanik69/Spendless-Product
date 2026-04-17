@@ -33,7 +33,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String path = request.getServletPath();
-        if (path.startsWith("/api/v1/auth") || path.startsWith("/docs") || path.startsWith("/swagger-ui/index.html")) {
+        if (path.startsWith("/api/v1/auth") ||
+                path.startsWith("/docs") ||
+                path.startsWith("/swagger-ui") ||      // <--- covers all swagger resources
+                path.startsWith("/v3/api-docs")) {    // <--- OpenAPI JSON
             filterChain.doFilter(request, response);
             return;
         }

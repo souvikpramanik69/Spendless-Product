@@ -1,5 +1,7 @@
 package com.Spendless.Product.model;
 
+import com.Spendless.Product.enums.Permissions;
+import com.Spendless.Product.enums.Role;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -13,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -48,7 +51,8 @@ public class Users implements UserDetails {
     private List<Expenses> expenses = new ArrayList<>();
 
 
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 
     public void addSection(Section section){
@@ -62,7 +66,16 @@ public class Users implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role));
+      Set<GrantedAuthority> authorities = new HashSet<>();
+      authorities.add(new SimpleGrantedAuthority(role.name()));
+
+      Set<SimpleGrantedAuthority> permissions = role.getPermissions().stream().map(item->
+     new SimpleGrantedAuthority(item.name())).collect(Collectors.toSet());
+      authorities.addAll(permissions);
+        return authorities;
+
+
+
     }
 
     @Override

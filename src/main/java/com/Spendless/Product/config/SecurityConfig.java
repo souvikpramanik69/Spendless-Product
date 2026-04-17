@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -20,6 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
 
     @Autowired
@@ -28,9 +30,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable).
-        authorizeHttpRequests((auth)-> auth.requestMatchers("/api/v1/auth/**","/docs","swagger-ui/index.html").permitAll().anyRequest().authenticated());
+        authorizeHttpRequests((auth)-> auth.requestMatchers("/api/v1/auth/**","/v3/api-docs/**","/docs", "/swagger-ui/**",
+                "/swagger-ui.html").permitAll().anyRequest().authenticated());   // Disable CSRF for Swagger endpoints
+
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-//                httpBasic(Customizer.withDefaults());
       return http.build();
     }
 
