@@ -30,7 +30,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable).
-        authorizeHttpRequests((auth)-> auth.requestMatchers("/api/v1/auth/**","/v3/api-docs/**","/docs", "/swagger-ui/**",
+        authorizeHttpRequests((auth)-> auth.requestMatchers("/api/v1/auth/**","/actuator/**","/v3/api-docs/**","/docs", "/swagger-ui/**",
                 "/swagger-ui.html").permitAll().anyRequest().authenticated());   // Disable CSRF for Swagger endpoints
 
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
