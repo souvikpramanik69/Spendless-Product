@@ -7,8 +7,8 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/spendless-product
     username: postgres
-    password: Souvikp683@
-#    password: vyrazu
+#    password: Souvikp683@
+    password: vyrazu
     driver-class-name: org.postgresql.Driver
   output:
     ansi:
@@ -42,6 +42,5 @@ management:
   endpoint:
     health:
       show-details: always
-#    shutdown:
-#      enabled: true
+
 
