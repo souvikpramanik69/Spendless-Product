@@ -5,10 +5,10 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:postgresql://localhost:5432/spendless-product
-    username: postgres
+    url: jdbc:postgresql://ep-cool-field-aopf8fp5-pooler.c-2.ap-southeast-1.aws.neon.tech/neondb?user=neondb_owner&password=npg_9iswM1HuGhxz&sslmode=require&channelBinding=require
+#    username: postgres
 #    password: Souvikp683@
-    password: vyrazu
+#    password: vyrazu
     driver-class-name: org.postgresql.Driver
   output:
     ansi:
