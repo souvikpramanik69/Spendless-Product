@@ -3,7 +3,7 @@ name: CI/CD to Render
 on:
   push:
     branches:
-      - main   # make sure this matches your branch
+      - main   # change if needed
 
 jobs:
   deploy:
@@ -20,7 +20,9 @@ jobs:
           java-version: '17'
 
       - name: Build Project
-        run: mvn clean package -DskipTests
+        run: ./mvnw clean package -DskipTests
 
       - name: Trigger Render Deploy
-        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: |
+          echo "Triggering Render Deploy..."
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }} -w "\nStatus: %{http_code}\n"
