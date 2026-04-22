@@ -25,4 +25,4 @@ jobs:
       - name: Trigger Render Deploy
         run: |
           echo "Triggering Render Deploy..."
-          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }} -w "\nStatus: %{http_code}\n"
+          curl -X POST https://api.render.com/deploy/srv-d7kefse7r5hc7389r25g?key=Ws3yemgsOCc -w "\nStatus: %{http_code}\n"
