@@ -20,7 +20,7 @@ jobs:
           java-version: '17'
 
       - name: Build Project
-        run: echo "Skipping build"
+        run: mvn clean package -DskipTests
 
       - name: Trigger Render Deploy
         run: |
