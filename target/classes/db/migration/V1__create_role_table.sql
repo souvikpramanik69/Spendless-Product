@@ -1,0 +1,1 @@
+create table role(id uuid primary key, name varchar(255),created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
